@@ -3,7 +3,7 @@ import bookImg from "../app/images/download.svg";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-green-800 dark:bg-green-600 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-green-800 dark:bg-dark-600 flex items-center justify-center relative overflow-hidden">
       <div className="absolute w-[300px] h-[300px] bg-yellow-300 opacity-30 rounded-full blur-3xl animate-ping z-0"></div>
 
       <div className="z-10 text-center">

@@ -1,80 +1,115 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import logo from "./app/images/logo.svg";
 import { useTranslation } from "react-i18next";
+import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedLang = e.target.value;
     i18n.changeLanguage(selectedLang);
   };
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
-    <div className="bg-success w-100">
-      <div className="container p-3 bg-success text-white d-flex justify-content-between align-items-center">
+    <nav className="w-full bg-green-800 text-white shadow-md relative z-50">
+      <div className="container mx-auto p-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="d-flex align-items-center">
+        <Link href="/" className="flex items-center">
           <Image
             src={logo}
             alt="Book Illustration"
             width={100}
             height={100}
-            className="mx-auto drop-shadow-2xl"
+            className="drop-shadow-2xl"
           />
-        </div>
+        </Link>
 
-
-        <ul className="list-unstyled d-flex gap-5 mb-0 custom-nav">
-          <li>
-            <Link href="/about" className="text-white text-decoration-none">
-              {t("about")}
-            </Link>
-          </li>
-          <li>
-            <Link href="/recent" className="text-white text-decoration-none">
-              {t("myBooks")}
-            </Link>
-          </li>
-          <li>
-            <Link href="/plans" className="text-white text-decoration-none">
-              {t("plans")}
-            </Link>
-          </li>
-          <li>
-            <Link href="/dashboard" className="text-white text-decoration-none">
-              {t("dashboard")}
-            </Link>
-          </li>
+        {/* Desktop menyu */}
+        <ul className="hidden lg:flex gap-6 items-center">
+          {[
+            { href: "/about", label: t("about") },
+            { href: "/recent", label: t("myBooks") },
+            { href: "/plans", label: t("plans") },
+            { href: "/dashboard", label: t("dashboard") },
+          ].map((item) => (
+            <li key={item.href} className="relative group">
+              <Link
+                style={{ textDecoration: "none" }}
+                href={item.href}
+                className="text-white transition duration-300 hover:text-yellow-300"
+              >
+                {item.label}
+                <span className="block h-[2px] bg-green-600 scale-x-0 group-hover:scale-x-100  transition-colors origin-left duration-300"></span>
+              </Link>
+            </li>
+          ))}
         </ul>
-
-        {/* Language Selector & Login */}
-        <div className="d-flex align-items-center gap-3">
+        <div className="hidden lg:flex gap-2">
           <select
-            className="form-select custom-select bg-success text-white border-white"
-            style={{ width: "80px" }}
             value={i18n.language}
             onChange={handleChangeLanguage}
+            className="bg-green-800 text-white border border-white rounded px-2 py-1 text-sm"
           >
             <option value="uz">Uzb</option>
             <option value="ru">Ru</option>
             <option value="en">Eng</option>
           </select>
-
           <Link
+            style={{ textDecoration: "none" }}
             href="/login"
-            className="btn text-white border-white"
-            style={{ backgroundColor: "transparent" }}
+            className="px-3 py-2 border border-white rounded hover:bg-white hover:text-black transition"
           >
             {t("login")}
           </Link>
         </div>
+        {/* Hamburger + select — faqat mobil uchun */}
+        <div className="lg:hidden flex items-center gap-3">
+          <select
+            value={i18n.language}
+            onChange={handleChangeLanguage}
+            className="bg-green-700 text-white border border-white rounded px-2 py-1 text-sm"
+          >
+            <option value="uz">Uzb</option>
+            <option value="ru">Ru</option>
+            <option value="en">Eng</option>
+          </select>
+          <button onClick={toggleMenu}>
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Mobil menyu (hamburger bosilganda chiqadi) */}
+     {menuOpen && (
+  <div className="lg:hidden absolute top-full left-0 w-full bg-green-800 text-white flex flex-col items-start px-4 py-4 space-y-2 z-40 shadow-lg">
+    {[
+      { href: "/about", label: t("about") },
+      { href: "/recent", label: t("myBooks") },
+      { href: "/plans", label: t("plans") },
+      { href: "/dashboard", label: t("dashboard") },
+      { href: "/login", label: t("login") },
+    ].map((item) => (
+      <Link
+        key={item.href}
+        href={item.href}
+        onClick={() => setMenuOpen(false)}
+        className="w-full text-left px-4 py-2 border-b border-white/30 rounded hover:bg-yellow-400 hover:text-black transition duration-200"
+      >
+        {item.label}
+      </Link>
+    ))}
+  </div>
+)}
+
+    </nav>
   );
 };
 
