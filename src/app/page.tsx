@@ -1,5 +1,6 @@
 import Image from "next/image";
 import bookImg from "../app/images/download.svg";
+import "../i18n";
 
 export default function HomePage() {
   return (

@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import logo from "./app/images/logo.svg";
 import { useTranslation } from "react-i18next";
-import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
