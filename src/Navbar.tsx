@@ -1,17 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import logo from "./app/images/logo.svg";
 import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
 
-import './i18n'
+import '@/i18n'
 
 const Navbar: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+  const lang = localStorage.getItem("i18nextLng") || "uz";
+  i18n.changeLanguage(lang);
+}, []);
+
 
   const handleChangeLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedLang = e.target.value;

@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={OpenSans.variable}>
+    <html lang="uz" className={OpenSans.variable}>
       <body className={` ${OpenSans} antialiased`}>
         <Navbar />
         {children}
