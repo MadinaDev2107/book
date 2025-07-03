@@ -1,0 +1,13 @@
+<svg width="220" height="60" viewBox="0 0 220 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Kitob rasmi -->
+  <rect x="0" y="5" width="40" height="50" rx="4" fill="#66bb6a"/>
+  <path d="M5 10H35M5 20H35M5 30H35M5 40H35" stroke="white" stroke-width="2"/>
+  
+  <!-- Matn "The Book" -->
+  <text x="50" y="25" font-family="Poppins, sans-serif" font-size="22" font-weight="600" fill="#2e7d32">
+    The
+  </text>
+  <text x="50" y="50" font-family="Poppins, sans-serif" font-size="28" font-weight="700" fill="#1b5e20">
+    Book
+  </text>
+</svg>
